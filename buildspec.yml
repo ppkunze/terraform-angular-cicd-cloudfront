@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing Node.js dependencies...
+      - npm install -g @angular/cli
+      - npm install
+
+  build:
+    commands:
+      - echo Building Angular application...
+      - ng build --configuration production
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Preparing files for artifacts...
+      - echo Using build directory dist/$ANGULAR_DIST_DIR/browser
+
+artifacts:
+  base-directory: dist/$ANGULAR_DIST_DIR/browser
+  files:
+    - '**/*'
+
+cache:
+  paths:
+    - 'node_modules/**/*'

@@ -216,7 +216,6 @@ resource "aws_lambda_function" "cloudfront_invalidate" {
   role             = aws_iam_role.cloudfront_invalidate_lambda.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.12"
-  timeout          = 600  # Set timeout to 10 minutes to allow for CloudFront invalidation to complete
   source_code_hash = filebase64sha256("lambda_cloudfront_invalidate.zip")
   environment {
     variables = {
